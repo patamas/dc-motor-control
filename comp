@@ -1,0 +1,9 @@
+avr-gcc -Wall -ffreestanding -Os -mmcu=atmega328p -c main.c
+avr-gcc -Wall -ffreestanding -Os -mmcu=atmega328p -c lcd.c
+avr-gcc -mmcu=atmega328p -o flash.elf main.o lcd.o
+avr-objcopy -j .text -j .data -O ihex flash.elf flash.hex
+avr-size --mcu=atmega328p --format=avr flash.elf
+avr-objdump -C -d flash.elf > flash.asm
+
+# avr-gcc -S -Os -mmcu=atmega328p -c clk.c
+# avr-objdump -C -d flash.elf > flash.asm
